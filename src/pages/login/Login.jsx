@@ -19,14 +19,14 @@ export const Login = () => {
   return (
     <main className="flex flex-row justify-center items-center min-h-screen p-5 sm:pl-5 md:pl-20 bg-[var(--color-dark-navy)]">
       <article className="w-full rounded-xl flex flex-row sm:gap-5 md:gap-20 drop-shadow-2xl min-h-[90vh] text-[var(--text-color-gray)]">
-        <section className="hidden sm:block login-bg-img w-1/2 p-2 rounded-xl shadow-xl shadow-gray-900/50">
+        <section className="hidden sm:block login-bg-img w-1/2 p-2 rounded-xl shadow-xl shadow-gray-900/50 box-left">
           <Link to={"/"}>
             <h2 className="  bg-[var(--color-dark-navy)] p-1 rounded-md px-2 w-fit">
               Project Management App
             </h2>
           </Link>
         </section>
-        <section className="sm:p-0 md:pl-5  pl-0 sm:pr-0 md:pr-16  w-full sm:w-1/2 flex flex-col gap-3 sm:justify-center">
+        <section className="sm:p-0 md:pl-5  pl-0 sm:pr-0 md:pr-16  w-full sm:w-1/2 flex flex-col gap-3 sm:justify-center box-right">
           <div className="sm:hidden flex flex-col h-1/4 justify-center items-center rounded-lg ">
             <Link to={"/"}>
               <h2 className="text-3xl p-4 text-[var(--color-dark-navy)] font-bold sm:p-1 rounded-lg px-2 w-fit backdrop-blur-2xl bg-white/50 ">

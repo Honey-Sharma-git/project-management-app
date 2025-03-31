@@ -72,3 +72,49 @@
 .hide {
   animation: fadeOutScale 0.3s forwards;
 }
+
+@keyframes moveOutwardRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translate(0%);
+  }
+}
+@keyframes moveOutwardLeft {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translate(0%);
+  }
+}
+
+.box-left {
+  z-index: 1;
+  animation-name: moveOutwardLeft;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-direction: forwards;
+}
+.box-right {
+  animation-name: moveOutwardRight;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-direction: forwards;
+}
+
+@keyframes dropNav {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.drop-nav-animation {
+  animation-name: dropNav;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-direction: forwards;
+}
