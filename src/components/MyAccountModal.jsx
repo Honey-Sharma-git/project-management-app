@@ -2,11 +2,12 @@ import profilePic from "../assets/images/default-profile-pic.png";
 import { FaUserAstronaut } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { MdWorkspacePremium } from "react-icons/md";
-export const MyAccountModal = () => {
+export const MyAccountModal = ({ isAccModalShown }) => {
   return (
-    <dialog
-      open
-      className="absolute top-8.5 shadow-xl p-3  rounded-lg bg-[var(--dialog-color-dark-navy)]  text-[var(--text-color-gray)] min-h-50 flex flex-col gap-3 w-[115%]"
+    <div
+      className={`absolute top-8.5 shadow-xl p-3  rounded-lg bg-[var(--dialog-color-dark-navy)]  text-[var(--text-color-gray)] min-h-50 flex flex-col gap-3 w-[115%] transition-[ opacity 0.3s ease-in-out, transform 0.3s ease-in-out;] ${
+        isAccModalShown ? "show" : "hide"
+      }`}
     >
       <figure className="flex flex-row items-center justify-center gap-3 p-2  ">
         <div className="relative p-1">
@@ -45,6 +46,6 @@ export const MyAccountModal = () => {
       <button className="bg-[var(--btn-color-purple)] text-[var(--text-color-gray)] p-1 rounded-lg shadow-lg cursor-pointer hover:bg-[var(--btn-hover-color-purple)]">
         Manage Profile
       </button>
-    </dialog>
+    </div>
   );
 };

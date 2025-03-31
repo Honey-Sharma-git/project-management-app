@@ -25,7 +25,9 @@ export const Navbar = () => {
         >
           My Account
         </button>
-        {isAccModalShown && <MyAccountModal />}
+        {isAccModalShown && (
+          <MyAccountModal isAccModalShown={isAccModalShown} />
+        )}
         <button
           onClick={logout}
           className="px-3 py-1 bg-[var(--btn-color-purple)] hover:bg-[var(--btn-hover-color-purple)] text-white rounded-lg cursor-pointer shadow-md"
