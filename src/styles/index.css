@@ -1,0 +1,24 @@
+@import "tailwindcss";
+/* For box-model */
+*,
+*::after,
+*::before {
+  outline: 1px solid red;
+}
+
+:root {
+  /* Primary Theme Color - Used for primary buttons, headers, and key UI elements */
+  --color-purple: #7209b7;
+
+  /* Alert & Attention Color - Used for urgent notifications, error messages, and important CTAs */
+  --color-pink: #f72585;
+
+  /* Background & Contrast Color - Ideal for dark mode backgrounds, dashboard panels, and text-heavy sections */
+  --color-navy: #3a0ca3;
+
+  /* Secondary Action & Interaction Color - Used for secondary buttons, hover effects, tooltips, and links */
+  --color-sky: #4361ee;
+
+  /* Highlights & Accents - Used for success messages, badges, UI separators, and subtle highlights */
+  --color-teal: #4cc9f0;
+}
