@@ -5,7 +5,7 @@ import { MdWorkspacePremium } from "react-icons/md";
 export const MyAccountModal = ({ isAccModalShown }) => {
   return (
     <div
-      className={`absolute top-8.5 shadow-xl p-3  rounded-lg bg-[var(--dialog-color-dark-navy)]  text-[var(--text-color-gray)] min-h-50 flex flex-col gap-3 w-[115%] transition-[ opacity 0.3s ease-in-out, transform 0.3s ease-in-out;] ${
+      className={` z-50 absolute top-8.5 shadow-xl p-3  rounded-lg bg-[var(--dialog-color-dark-navy)]  text-[var(--text-color-gray)] min-h-50 flex flex-col gap-3 w-[115%] transition-[ opacity 0.3s ease-in-out, transform 0.3s ease-in-out;] ${
         isAccModalShown ? "show" : "hide"
       }`}
     >
