@@ -3,22 +3,42 @@
 *,
 *::after,
 *::before {
-  outline: 1px solid red;
+  /* outline: 1px solid red;   */
 }
 
 :root {
+  /* For text on dark */
+  --text-color-gray: #dddddd;
   /* Primary Theme Color - Used for primary buttons, headers, and key UI elements */
   --color-purple: #7209b7;
-
+  --btn-color-purple: #7209b7;
+  --btn-hover-color-purple: #4f0581;
   /* Alert & Attention Color - Used for urgent notifications, error messages, and important CTAs */
   --color-pink: #f72585;
-
+  --link-color: #f72585;
   /* Background & Contrast Color - Ideal for dark mode backgrounds, dashboard panels, and text-heavy sections */
   --color-navy: #3a0ca3;
-
+  --color-dark-navy: #14033a;
+  --input-bg-color: #312843;
   /* Secondary Action & Interaction Color - Used for secondary buttons, hover effects, tooltips, and links */
   --color-sky: #4361ee;
-
   /* Highlights & Accents - Used for success messages, badges, UI separators, and subtle highlights */
   --color-teal: #4cc9f0;
+}
+
+.login-bg-img {
+  background-image: url("/src/assets/images/login.svg");
+  background-color: #3a0ca3;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.signup-bg-img {
+  background-image: url("/src/assets/images/signup.svg");
+  background-color: #7209b7;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }

@@ -1,3 +1,7 @@
 export const Login = () => {
-  return <h1>Login page</h1>;
+  return (
+    <main className="login-bg-img min-h-screen">
+      <h1 >Login page goes here</h1>
+    </main>
+  );
 };
