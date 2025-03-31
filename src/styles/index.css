@@ -19,11 +19,12 @@
   /* Background & Contrast Color - Ideal for dark mode backgrounds, dashboard panels, and text-heavy sections */
   --color-navy: #3a0ca3;
   --color-dark-navy: #14033a;
+  --dialog-color-dark-navy: #14033a;
   --input-bg-color: #312843;
   /* Secondary Action & Interaction Color - Used for secondary buttons, hover effects, tooltips, and links */
   --color-sky: #4361ee;
   /* Highlights & Accents - Used for success messages, badges, UI separators, and subtle highlights */
-  --color-teal: #4cc9f0;
+  --color-teal: #0099c8;
 }
 
 .login-bg-img {

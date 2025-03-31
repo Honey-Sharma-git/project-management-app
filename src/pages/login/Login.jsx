@@ -2,13 +2,19 @@ import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export const Login = () => {
   const [isPassShown, setIsPassShown] = useState(false);
+  const navigate = useNavigate();
   function togglePassShown(e) {
     e.preventDefault();
     setIsPassShown((prev) => {
       return !prev;
     });
+  }
+  function login(e) {
+    e.preventDefault();
+    navigate("/dashboard");
   }
   return (
     <main className="flex flex-row justify-center items-center min-h-screen p-5 sm:pl-5 md:pl-20 bg-[var(--color-dark-navy)]">
@@ -69,9 +75,7 @@ export const Login = () => {
             </div>
             <div>
               <button
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
+                onClick={login}
                 className=" hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50"
               >
                 Log in
