@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { FaSort } from "react-icons/fa6";
 import { FaChevronUp } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
-export const TableHeaderData = () => {
+export const TableHeaderData = ({ sort }) => {
   const [header, setHeader] = useState([
     { id: 1, name: "Project name", isSorted: false },
     { id: 2, name: "Version", isSorted: false },
@@ -12,10 +11,11 @@ export const TableHeaderData = () => {
     { id: 6, name: "Edit details", isSorted: false },
     { id: 7, name: "More", isSorted: false },
   ]);
-  function toggleSort(itemID) {
+  function toggleSort(headerObj) {
+    sort(headerObj);
     setHeader((prev) => {
       return prev.map((item) => {
-        if (itemID === item.id) {
+        if (headerObj.id === item.id) {
           return { ...item, isSorted: !item.isSorted };
         } else {
           return { ...item };
@@ -30,7 +30,7 @@ export const TableHeaderData = () => {
           <th key={item.id}>
             <div
               onClick={() => {
-                toggleSort(item.id);
+                toggleSort(item);
               }}
               className="flex flex-row items-center gap-2 py-2"
             >

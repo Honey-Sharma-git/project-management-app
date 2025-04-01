@@ -24,7 +24,7 @@ export const projectsData = [
     name: "Blog-CMS",
     version: "4.0",
     testLink: "https://example.com/test-blog",
-    uat: "3.7",
+    uat: "0.7",
     liveLink: "https://example.com/live-blog",
   },
   {
