@@ -23,7 +23,27 @@ export const Signup = () => {
       return { ...prev, [e.target.name]: e.target.value };
     });
   }
-  console.log(newUser);
+
+  async function postData() {
+    try {
+      const response = await fetch("http://192.168.0.105:8080/auth/signup", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log("Error putting data while signing up", error);
+    }
+    setNewUser({
+      email: "",
+      password: "",
+      name: "",
+    });
+  }
   return (
     <main className="flex flex-row justify-center items-center min-h-screen p-5 sm:pl-5 md:pl-20 bg-[var(--color-dark-navy)]">
       <article className="w-full rounded-xl flex flex-row sm:gap-5 md:gap-20 drop-shadow-2xl min-h-[90vh] text-[var(--text-color-gray)]">
@@ -59,7 +79,8 @@ export const Signup = () => {
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="Kapoor"
+                  value={newUser.name}
+                  placeholder="Karan Kapoor"
                 />
               </div>
             </div>
@@ -71,6 +92,7 @@ export const Signup = () => {
                 type="text"
                 name="email"
                 id="email"
+                value={newUser.email}
                 placeholder="myemail@example.com"
               />
             </div>
@@ -83,6 +105,7 @@ export const Signup = () => {
                   type={isPassShown ? "text" : "password"}
                   name="password"
                   id="password"
+                  value={newUser.password}
                   placeholder="**************"
                 />
                 <button
@@ -114,6 +137,7 @@ export const Signup = () => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
+                  postData();
                 }}
                 className=" hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50"
               >
