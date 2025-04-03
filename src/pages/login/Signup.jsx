@@ -1,15 +1,29 @@
-import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 export const Signup = () => {
   const [isPassShown, setIsPassShown] = useState(false);
+  const [newUser, setNewUser] = useState({
+    email: "",
+    password: "",
+    name: "",
+  });
+
   function togglePassShown(e) {
     e.preventDefault();
     setIsPassShown((prev) => {
       return !prev;
     });
   }
+
+  function handleChange(e) {
+    setNewUser((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  }
+  console.log(newUser);
   return (
     <main className="flex flex-row justify-center items-center min-h-screen p-5 sm:pl-5 md:pl-20 bg-[var(--color-dark-navy)]">
       <article className="w-full rounded-xl flex flex-row sm:gap-5 md:gap-20 drop-shadow-2xl min-h-[90vh] text-[var(--text-color-gray)]">
@@ -37,23 +51,14 @@ export const Signup = () => {
           </p>
           <form className="flex flex-col gap-3 ">
             <div className="flex flex-row gap-5 flex-wrap lg:flex-nowrap justify-between ">
-              <div className="flex flex-col w-full   gap-1">
-                <label htmlFor="fName">First name:</label>
-                <input
-                  className="p-2 bg-[var(--input-bg-color)] rounded-sm"
-                  type="text"
-                  name="fName"
-                  id="fName"
-                  placeholder="Karan"
-                />
-              </div>
               <div className="flex flex-col w-full    gap-1">
-                <label htmlFor="lName">Last name:</label>
+                <label htmlFor="name">Full name:</label>
                 <input
+                  onChange={handleChange}
                   className="p-2 bg-[var(--input-bg-color)] rounded-sm"
                   type="text"
-                  name="lName"
-                  id="lName"
+                  name="name"
+                  id="name"
                   placeholder="Kapoor"
                 />
               </div>
@@ -61,6 +66,7 @@ export const Signup = () => {
             <div className="flex flex-col gap-1">
               <label htmlFor="email">Email:</label>
               <input
+                onChange={handleChange}
                 className="p-2 bg-[var(--input-bg-color)] rounded-sm"
                 type="text"
                 name="email"
@@ -72,6 +78,7 @@ export const Signup = () => {
               <label htmlFor="password">Password:</label>
               <div className="relative">
                 <input
+                  onChange={handleChange}
                   className="p-2 pr-10 bg-[var(--input-bg-color)] rounded-sm w-full"
                   type={isPassShown ? "text" : "password"}
                   name="password"
