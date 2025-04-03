@@ -1,7 +1,8 @@
 import { projectsData } from "../projectData";
-import { useEffect, useState } from "react";
 import { TableHeaderData } from "./projectTable/TableHeaderData";
 import { TableBodyData } from "./projectTable/TableBodyData";
+import { useEffect, useState } from "react";
+
 export const ProjectTable = () => {
   const [projects, setProjects] = useState(null);
 
@@ -60,6 +61,7 @@ export const ProjectTable = () => {
   useEffect(() => {
     setProjects(projectsData);
   }, []);
+
   return (
     <div className="h-100 overflow-auto shadow-2xl rounded-2xl border">
       <table className="text-left w-full p-1">
