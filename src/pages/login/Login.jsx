@@ -43,7 +43,7 @@ export const Login = () => {
       //On success of API:
       if (response.status === 200) {
         //Login successful alert:
-        alert(data?.message);
+        alert(data?.message, "success");
 
         //Setting token and userId to localStorage:
         console.log(data.token);
@@ -51,10 +51,11 @@ export const Login = () => {
         setUserId(data.userId);
       } else {
         //Error message in alert:
-        alert(data?.message);
+        alert(data?.message, "warning");
       }
     } catch (error) {
       console.log("Error putting data while signing up", error);
+      alert(error, "error");
     }
   }
   //If token is present move to dashboard

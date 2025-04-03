@@ -39,13 +39,14 @@ export const Signup = () => {
       const data = await response.json();
 
       if (response.status === 201) {
-        alert(data.message);
+        alert(data.message, "success");
         navigate("/");
       } else {
-        alert(data.data[0].msg);
+        alert(data.data[0].msg, "error");
       }
     } catch (error) {
       console.log("Error putting data while signing up", error);
+      alert(error, "error");
     }
     setNewUser({
       email: "",

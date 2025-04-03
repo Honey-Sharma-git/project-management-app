@@ -118,3 +118,20 @@
   animation-timing-function: ease-in-out;
   animation-direction: forwards;
 }
+
+@keyframes alert-animation {
+  from {
+    transform: translateY(-300%);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}
+.alert-animation {
+  animation-name: alert-animation;
+  animation-duration: 500ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-direction: forwards;
+}
