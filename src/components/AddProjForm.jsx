@@ -33,7 +33,9 @@ export const AddProjForm = ({ setIsAddProjFormShown, setIsProjectAdded }) => {
       if (response.status === 201) {
         Alert(data.message, "success", msgTime.SHORT);
         setIsAddProjFormShown(false);
-        setIsProjectAdded(true);
+        setIsProjectAdded((prev) => {
+          return !prev;
+        });
       } else {
         Alert(data.message, "warning", msgTime.LONG);
       }
