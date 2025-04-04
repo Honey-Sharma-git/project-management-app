@@ -2,50 +2,53 @@ import { projectsData } from "../projectData";
 import { TableHeaderData } from "./projectTable/TableHeaderData";
 import { TableBodyData } from "./projectTable/TableBodyData";
 import { useEffect, useState } from "react";
+import { Alert } from "../utils/common";
 
 export const ProjectTable = () => {
   const [projects, setProjects] = useState(null);
+
+  async function getTableData() {
+    try {
+      const response = await fetch("http://192.168.0.105:8080/feed/posts");
+      const data = await response.json();
+      if (response.status === 200) {
+        Alert(data.message, "success");
+      } else {
+        Alert(data.message, "warning");
+      }
+      console.log(data);
+    } catch (error) {
+      console.log("Error while getting table data:", error);
+      Alert(error, "error");
+    }
+  }
 
   function sort(headerObj) {
     //This function needs to be exported to common.js
     console.log("sorting...", headerObj.isSorted);
     setProjects((prev) => {
       return prev.toSorted((a, b) => {
-        if ("Version" === headerObj.name) {
+        if ("Live version" === headerObj.name) {
           if (headerObj.isSorted) {
-            return Number(a.version) - Number(b.version);
+            return Number(a.liveVersion) - Number(b.liveVersion);
           } else {
-            return Number(b.version) - Number(a.version);
+            return Number(b.liveVersion) - Number(a.liveVersion);
           }
-        } else if ("UAT" === headerObj.name) {
+        } else if ("UAT version" === headerObj.name) {
           if (headerObj.isSorted) {
-            return Number(a.uat) - Number(b.uat);
+            return Number(a.uatVersion) - Number(b.uatVersion);
           } else {
-            return Number(b.uat) - Number(a.uat);
+            return Number(b.uatVersion) - Number(a.uatVersion);
+          }
+        } else if ("Test version" === headerObj.name) {
+          if (headerObj.isSorted) {
+            return Number(a.testVersion) - Number(b.testVersion);
+          } else {
+            return Number(b.testVersion) - Number(a.testVersion);
           }
         } else if ("Project name" === headerObj.name) {
-          let x = a.name.toLowerCase();
-          let y = b.name.toLowerCase();
-          if (x > y) {
-            return headerObj.isSorted ? 1 : -1;
-          }
-          if (x < y) {
-            return headerObj.isSorted ? -1 : 1;
-          }
-          return 0;
-        } else if ("Live link" === headerObj.name) {
-          let x = a.liveLink.toLowerCase();
-          let y = b.liveLink.toLowerCase();
-          if (x > y) {
-            return headerObj.isSorted ? 1 : -1;
-          }
-          if (x < y) {
-            return headerObj.isSorted ? -1 : 1;
-          }
-          return 0;
-        } else if ("Test link" === headerObj.name) {
-          let x = a.testLink.toLowerCase();
-          let y = b.testLink.toLowerCase();
+          let x = a.projName.toLowerCase();
+          let y = b.projName.toLowerCase();
           if (x > y) {
             return headerObj.isSorted ? 1 : -1;
           }
@@ -59,6 +62,7 @@ export const ProjectTable = () => {
   }
 
   useEffect(() => {
+    getTableData();
     setProjects(projectsData);
   }, []);
 
