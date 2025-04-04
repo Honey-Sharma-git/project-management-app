@@ -66,7 +66,7 @@ export const ProjectTable = ({ isProjectAdded }) => {
   }, [isProjectAdded]);
 
   return (
-    <div className="h-100 overflow-auto shadow-2xl rounded-2xl border">
+    <div className="min-h-48 overflow-auto shadow-2xl rounded-2xl border">
       <table className="text-left w-full p-1">
         <thead className="shadow-lg font-bold sticky text-white top-0 bg-[var(--color-sky)]">
           <TableHeaderData sort={sort} />
@@ -76,6 +76,13 @@ export const ProjectTable = ({ isProjectAdded }) => {
             {projects.map((data, index) => {
               return <TableBodyData key={index} data={data} />;
             })}
+            {!projects.length && (
+              <tr>
+                <td colSpan={6} className="text-center">
+                  No record found
+                </td>
+              </tr>
+            )}
           </tbody>
         ) : (
           <tfoot>

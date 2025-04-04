@@ -1,6 +1,7 @@
+import { FaTrashCan } from "react-icons/fa6";
 import { FaPencilAlt } from "react-icons/fa";
-import { MdOutlineMoreVert } from "react-icons/md";
 export const TableBodyData = ({ data }) => {
+  console.log("hello", data);
   return (
     <tr className="border-b hover:bg-gray-100 ">
       <td className="p-2 py-4 font-medium">{data.projName}</td>
@@ -11,7 +12,7 @@ export const TableBodyData = ({ data }) => {
         <FaPencilAlt />
       </td>
       <td className="p-2 py-4 text-2xl text-[var(--btn-color-purple)] hover:text-[var(--color-teal)] cursor-pointer">
-        <MdOutlineMoreVert />
+        <FaTrashCan />
       </td>
     </tr>
   );
