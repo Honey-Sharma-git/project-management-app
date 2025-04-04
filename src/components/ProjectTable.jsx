@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Alert } from "../utils/common";
 import { msgTime } from "../utils/constants";
 
-export const ProjectTable = ({ isProjectAdded }) => {
+export const ProjectTable = ({ isProjectAdded, setIsProjectAdded }) => {
   const [projects, setProjects] = useState(null);
 
   async function getTableData() {
@@ -66,7 +66,7 @@ export const ProjectTable = ({ isProjectAdded }) => {
   }, [isProjectAdded]);
 
   return (
-    <div className="min-h-48 overflow-auto shadow-2xl rounded-2xl border">
+    <div className="max-h-78 overflow-auto shadow-2xl rounded-2xl border">
       <table className="text-left w-full p-1">
         <thead className="shadow-lg font-bold sticky text-white top-0 bg-[var(--color-sky)]">
           <TableHeaderData sort={sort} />
@@ -74,7 +74,13 @@ export const ProjectTable = ({ isProjectAdded }) => {
         {projects ? (
           <tbody>
             {projects.map((data, index) => {
-              return <TableBodyData key={index} data={data} />;
+              return (
+                <TableBodyData
+                  key={index}
+                  data={data}
+                  setIsProjectAdded={setIsProjectAdded}
+                />
+              );
             })}
             {!projects.length && (
               <tr>
