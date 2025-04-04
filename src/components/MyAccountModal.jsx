@@ -29,18 +29,20 @@ export const MyAccountModal = ({ isAccModalShown }) => {
       </figure>
       <div className="px-2 border-b-2  border-dashed border-t-2 border-gray-500 ">
         <table className="w-full">
-          <tr className="">
-            <th className="text-xl py-2 text-[var(--color-pink)]">
-              <FaUserAstronaut />
-            </th>
-            <td className="text-sm">superAdmin123</td>
-          </tr>
-          <tr className="">
-            <th className="text-xl py-2 text-[var(--color-pink)]">
-              <MdEmail />
-            </th>
-            <td className="text-sm">admin@gmail.com</td>
-          </tr>
+          <tbody>
+            <tr className="">
+              <th className="text-xl py-2 text-[var(--color-pink)]">
+                <FaUserAstronaut />
+              </th>
+              <td className="text-sm">superAdmin123</td>
+            </tr>
+            <tr className="">
+              <th className="text-xl py-2 text-[var(--color-pink)]">
+                <MdEmail />
+              </th>
+              <td className="text-sm">admin@gmail.com</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <button className="bg-[var(--btn-color-purple)] text-[var(--text-color-gray)] p-1 rounded-lg shadow-lg cursor-pointer hover:bg-[var(--btn-hover-color-purple)]">
