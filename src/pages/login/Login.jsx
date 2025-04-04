@@ -3,7 +3,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { alert } from "../../utils/common";
+import { Alert } from "../../utils/common";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -42,20 +42,20 @@ export const Login = () => {
 
       //On success of API:
       if (response.status === 200) {
-        //Login successful alert:
-        alert(data?.message, "success");
+        //Login successful Alert:
+        Alert(data?.message, "success");
 
         //Setting token and userId to localStorage:
         console.log(data.token);
         setToken(data.token);
         setUserId(data.userId);
       } else {
-        //Error message in alert:
-        alert(data?.message, "warning");
+        //Error message in Alert:
+        Alert(data?.message, "warning");
       }
     } catch (error) {
       console.log("Error putting data while signing up", error);
-      alert(error, "error");
+      Alert(error, "error");
     }
   }
   //If token is present move to dashboard

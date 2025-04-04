@@ -2,7 +2,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { alert } from "../../utils/common";
+import { Alert } from "../../utils/common";
 import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
@@ -39,14 +39,14 @@ export const Signup = () => {
       const data = await response.json();
 
       if (response.status === 201) {
-        alert(data.message, "success");
+        Alert(data.message, "success");
         navigate("/");
       } else {
-        alert(data.data[0].msg, "error");
+        Alert(data.data[0].msg, "error");
       }
     } catch (error) {
       console.log("Error putting data while signing up", error);
-      alert(error, "error");
+      Alert(error, "error");
     }
     setNewUser({
       email: "",
