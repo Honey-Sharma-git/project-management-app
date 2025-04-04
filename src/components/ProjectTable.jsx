@@ -3,6 +3,7 @@ import { TableHeaderData } from "./projectTable/TableHeaderData";
 import { TableBodyData } from "./projectTable/TableBodyData";
 import { useEffect, useState } from "react";
 import { Alert } from "../utils/common";
+import { msgTime } from "../utils/constants";
 
 export const ProjectTable = () => {
   const [projects, setProjects] = useState(null);
@@ -12,14 +13,14 @@ export const ProjectTable = () => {
       const response = await fetch("http://192.168.0.105:8080/feed/posts");
       const data = await response.json();
       if (response.status === 200) {
-        Alert(data.message, "success");
+        Alert(data.message, "success", msgTime.VERY_SHORT);
       } else {
-        Alert(data.message, "warning");
+        Alert(data.message, "warning", msgTime.VERY_LONG);
       }
       console.log(data);
     } catch (error) {
       console.log("Error while getting table data:", error);
-      Alert(error, "error");
+      Alert(error, "error", msgTime.LONG);
     }
   }
 

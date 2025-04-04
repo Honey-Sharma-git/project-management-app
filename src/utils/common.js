@@ -1,4 +1,4 @@
-export const alert = (message, type) => {
+export const Alert = (message, type, msgTime = 2000) => {
   let alertStyles = "bg-gray-700 text-white";
   if (type === "warning") {
     alertStyles = "bg-amber-300";
@@ -22,5 +22,5 @@ export const alert = (message, type) => {
   //Removing alert after 3 seconds:
   setTimeout(() => {
     alertBox.remove();
-  }, 2000);
+  }, msgTime);
 };

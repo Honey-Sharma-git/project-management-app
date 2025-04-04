@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Alert } from "../../utils/common";
 import { useNavigate } from "react-router-dom";
+import { msgTime } from "../../utils/constants";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -39,14 +40,14 @@ export const Signup = () => {
       const data = await response.json();
 
       if (response.status === 201) {
-        Alert(data.message, "success");
+        Alert(data.message, "success", msgTime.VERY_SHORT);
         navigate("/");
       } else {
-        Alert(data.data[0].msg, "error");
+        Alert(data.data[0].msg, "error", msgTime.LONG);
       }
     } catch (error) {
       console.log("Error putting data while signing up", error);
-      Alert(error, "error");
+      Alert(error, "error", msgTime.VERY_LONG);
     }
     setNewUser({
       email: "",

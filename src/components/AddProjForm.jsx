@@ -1,3 +1,4 @@
+import { msgTime } from "../utils/constants";
 import { useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { Alert } from "../utils/common";
@@ -29,13 +30,13 @@ export const AddProjForm = ({ setIsAddProjFormShown }) => {
       });
       const data = await response.json();
       if (response.status === 201) {
-        Alert(data.message, "success");
+        Alert(data.message, "success", msgTime.SHORT);
       } else {
-        Alert(data.message, "warning");
+        Alert(data.message, "warning", msgTime.LONG);
       }
     } catch (error) {
       console.log("Error while fetching post API", error);
-      Alert(data.message, "error");
+      Alert(data.message, "error", msgTime.VERY_LONG);
     }
   }
 
