@@ -4,12 +4,11 @@ import { FaChevronDown } from "react-icons/fa";
 export const TableHeaderData = ({ sort }) => {
   const [header, setHeader] = useState([
     { id: 1, name: "Project name", isSorted: false },
-    { id: 2, name: "Version", isSorted: false },
-    { id: 3, name: "UAT", isSorted: false },
-    { id: 4, name: "Live link", isSorted: false },
-    { id: 5, name: "Test link", isSorted: false },
-    { id: 6, name: "Edit details", isSorted: false },
-    { id: 7, name: "More", isSorted: false },
+    { id: 2, name: "Test version", isSorted: false },
+    { id: 3, name: "UAT version", isSorted: false },
+    { id: 4, name: "Live version", isSorted: false },
+    { id: 6, name: "Edit details" },
+    { id: 7, name: "Delete" },
   ]);
   function toggleSort(headerObj) {
     sort(headerObj);
@@ -35,7 +34,12 @@ export const TableHeaderData = ({ sort }) => {
               className="flex flex-row items-center gap-2 py-2"
             >
               <span className="cursor-pointer">{item.name}</span>
-              <span>{item.isSorted ? <FaChevronUp /> : <FaChevronDown />}</span>
+              {/* For removing these icons on id:6,7 */}
+              {item.id !== 6 && item.id !== 7 && (
+                <span>
+                  {item.isSorted ? <FaChevronUp /> : <FaChevronDown />}
+                </span>
+              )}
             </div>
           </th>
         );

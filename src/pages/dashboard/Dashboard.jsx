@@ -4,6 +4,7 @@ import { AddProjForm } from "../../components/AddProjForm";
 import { useState } from "react";
 export const Dashboard = () => {
   const [isAddProjFormShown, setIsAddProjFormShown] = useState(false);
+  const [isProjectAdded, setIsProjectAdded] = useState(false);
   return (
     <>
       <header className="sticky top-0 z-40">
@@ -19,9 +20,14 @@ export const Dashboard = () => {
           Add project
         </button>
         {isAddProjFormShown && (
-          <AddProjForm setIsAddProjFormShown={setIsAddProjFormShown} />
+          <AddProjForm
+            setIsAddProjFormShown={setIsAddProjFormShown}
+            setIsProjectAdded={setIsProjectAdded}
+          />
         )}
-        <ProjectTable />
+        <ProjectTable
+          isProjectAdded={isProjectAdded}
+        />
       </main>
     </>
   );

@@ -2,7 +2,8 @@ import { msgTime } from "../utils/constants";
 import { useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { Alert } from "../utils/common";
-export const AddProjForm = ({ setIsAddProjFormShown }) => {
+
+export const AddProjForm = ({ setIsAddProjFormShown, setIsProjectAdded }) => {
   const [projectData, setProjectData] = useState({
     projName: "",
     liveVersion: "",
@@ -31,6 +32,8 @@ export const AddProjForm = ({ setIsAddProjFormShown }) => {
       const data = await response.json();
       if (response.status === 201) {
         Alert(data.message, "success", msgTime.SHORT);
+        setIsAddProjFormShown(false);
+        setIsProjectAdded(true);
       } else {
         Alert(data.message, "warning", msgTime.LONG);
       }
