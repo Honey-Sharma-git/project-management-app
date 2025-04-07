@@ -16,7 +16,7 @@ export const Navbar = () => {
     navigate("/");
   }
   return (
-    <nav className="bg-[var(--color-teal)] flex flex-row justify-between px-10 py-2 shadow-lg drop-nav-animation ">
+    <nav className="bg-[var(--color-teal)] flex flex-row flex-wrap justify-between px-2 sm:px-5 md:px-5 py-2 shadow-lg drop-nav-animation gap-5">
       <h1 className="text-2xl font-bold text-white">
         Project Management Dashboard
       </h1>

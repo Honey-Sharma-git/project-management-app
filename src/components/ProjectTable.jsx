@@ -67,7 +67,7 @@ export const ProjectTable = ({ isProjectAdded, setIsProjectAdded }) => {
 
   return (
     <div className="max-h-78 overflow-auto shadow-2xl rounded-2xl border">
-      <table className="text-left w-full p-1">
+      <table className="text-left w-full p-1 text-sm">
         <thead className="shadow-lg font-bold sticky text-white top-0 bg-[var(--color-sky)]">
           <TableHeaderData sort={sort} />
         </thead>

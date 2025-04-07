@@ -12,7 +12,7 @@ export const Dashboard = () => {
       <header className="sticky top-0 z-40">
         <Navbar />
       </header>
-      <main className="px-10 py-10 space-y-7 relative">
+      <main className="px-2 sm:px-5 md:px-5 py-10 space-y-7 relative min-h-screen">
         <button
           onClick={() => {
             setIsAddProjFormShown(true);
