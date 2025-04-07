@@ -2,6 +2,8 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleProjForm } from "../../redux/slice/updateProjFormSlice";
 import { useState } from "react";
+import { Alert } from "../../utils/common";
+import { msgTime } from "../../utils/constants";
 export const ProjEditDialog = () => {
   const dispatch = useDispatch();
   const projectData = useSelector((state) => {
@@ -13,12 +15,39 @@ export const ProjEditDialog = () => {
     testVersion: projectData.testVersion,
     uatVersion: projectData.uatVersion,
   });
-  console.log(updatedProjectData);
 
   function handleFormUpdate(e) {
     setUpdatedProjectData((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
+  }
+  async function postUpdatedProjData(e) {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://192.168.0.105:8080/feed/post/${projectData._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...updatedProjectData,
+            userId: localStorage.getItem("userId"),
+          }),
+        }
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        Alert(data.message, "success");
+        //For closing dialog box upon update
+        dispatch(toggleProjForm());
+      } else {
+        Alert(data.message, "error", msgTime.VERY_LONG);
+      }
+    } catch (error) {
+      console.log("Error while updating proj form data", error);
+    }
   }
   return (
     <aside className="min-h-screen absolute inset-0 flex flex-col justify-center open-add-proj-form rounded-lg border shadow-xl bg-[var(--dialog-color-dark-navy)] text-white p-3 lg:p-5 2 lg:pb-13 ">
@@ -89,7 +118,10 @@ export const ProjEditDialog = () => {
               />
             </div>
           </div>
-          <button className="text-white bg-[var(--btn-color-purple)] hover:bg-[var(--btn-hover-color-purple)] w-full lg:w-fit px-10 py-1  rounded-lg cursor-pointer">
+          <button
+            onClick={postUpdatedProjData}
+            className="text-white bg-[var(--btn-color-purple)] hover:bg-[var(--btn-hover-color-purple)] w-full lg:w-fit px-10 py-1  rounded-lg cursor-pointer"
+          >
             Update
           </button>
         </fieldset>

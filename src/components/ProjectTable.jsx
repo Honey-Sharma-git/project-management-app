@@ -3,10 +3,13 @@ import { TableBodyData } from "./projectTable/TableBodyData";
 import { useEffect, useState } from "react";
 import { Alert } from "../utils/common";
 import { msgTime } from "../utils/constants";
-
+import { useSelector } from "react-redux";
 export const ProjectTable = ({ isProjectAdded, setIsProjectAdded }) => {
   const [projects, setProjects] = useState(null);
-
+  //For updating table data after modification
+  const isFormUpdated = useSelector((state) => {
+    return state.updateProjForm;
+  });
   async function getTableData() {
     try {
       const response = await fetch("http://192.168.0.105:8080/feed/posts");
@@ -62,7 +65,7 @@ export const ProjectTable = ({ isProjectAdded, setIsProjectAdded }) => {
 
   useEffect(() => {
     getTableData();
-  }, [isProjectAdded]);
+  }, [isProjectAdded, isFormUpdated]);
 
   return (
     <div className="max-h-78 overflow-auto shadow-2xl rounded-2xl border">
