@@ -51,7 +51,8 @@ export const TableBodyData = ({ data, setIsProjectAdded }) => {
         <button
           className="cursor-pointer"
           onClick={() => {
-            deleteProjData(data);
+            const answer = window.confirm("Do you want to delete?");
+            answer ? deleteProjData(data) : null;
           }}
         >
           <FaTrashCan />
