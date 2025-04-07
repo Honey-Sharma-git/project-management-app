@@ -6,16 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "../../utils/common";
 import { msgTime } from "../../utils/constants";
 import { useSelector } from "react-redux";
-
 export const Login = () => {
   const navigate = useNavigate();
   const justSignedUpUser = useSelector((state) => {
     return state.saveSignupData;
   });
-  console.log(justSignedUpUser);
   const [isPassShown, setIsPassShown] = useState(false);
   const [token, setToken] = useState("");
   const [userId, setUserId] = useState("");
+  const [userNameEmail, setUserNameEmail] = useState({});
   const [user, setUser] = useState({
     email: justSignedUpUser.email,
     password: justSignedUpUser.password,
@@ -54,6 +53,7 @@ export const Login = () => {
         //Setting token and userId to localStorage:
         setToken(data.token);
         setUserId(data.userId);
+        setUserNameEmail({ name: data.name, email: data.email });
       } else {
         //Error message in Alert:
         Alert(data?.message, "warning", msgTime.LONG);
@@ -68,7 +68,10 @@ export const Login = () => {
     if (token && userId) {
       localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
+      localStorage.setItem("userName", userNameEmail.name);
+      localStorage.setItem("userEmail", userNameEmail.email);
     }
+
     if (localStorage.getItem("token")) {
       navigate("/dashboard");
     }

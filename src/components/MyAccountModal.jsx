@@ -3,6 +3,8 @@ import { FaUserAstronaut } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { MdWorkspacePremium } from "react-icons/md";
 export const MyAccountModal = ({ isAccModalShown }) => {
+  const userName = localStorage.getItem("userName");
+  const userEmail = localStorage.getItem("userEmail");
   return (
     <div
       className={`z-50 absolute top-8.5 shadow-xl p-3  rounded-lg bg-[var(--dialog-color-dark-navy)]  text-[var(--text-color-gray)] min-h-50 flex flex-col gap-3 transition-[ opacity 0.3s ease-in-out, transform 0.3s ease-in-out;] ${
@@ -24,7 +26,7 @@ export const MyAccountModal = ({ isAccModalShown }) => {
           </span>
         </div>
         <div>
-          <figcaption>Hi Honey Sharma</figcaption>
+          <figcaption>Hi {userName}</figcaption>
         </div>
       </figure>
       <div className="px-2 border-b-2  border-dashed border-t-2 border-gray-500 ">
@@ -40,7 +42,7 @@ export const MyAccountModal = ({ isAccModalShown }) => {
               <th className="text-xl py-2 text-[var(--color-pink)]">
                 <MdEmail />
               </th>
-              <td className="text-sm">admin@gmail.com</td>
+              <td className="text-sm">{userEmail}</td>
             </tr>
           </tbody>
         </table>
