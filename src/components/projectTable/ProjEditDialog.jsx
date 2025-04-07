@@ -50,7 +50,7 @@ export const ProjEditDialog = () => {
     }
   }
   return (
-    <aside className="min-h-screen absolute inset-0 flex flex-col justify-center open-add-proj-form rounded-lg border shadow-xl bg-[var(--dialog-color-dark-navy)] text-white p-3 lg:p-5 2 lg:pb-13 ">
+    <aside className="min-h-screen absolute inset-0 flex flex-col justify-center open-add-proj-form rounded-lg border shadow-xl bg-[var(--dialog-color-dark-navy)]/90 backdrop-blur-sm text-white p-3 lg:p-5 2 lg:pb-13 ">
       <div
         onClick={() => {
           dispatch(toggleProjForm());

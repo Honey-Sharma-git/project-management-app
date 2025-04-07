@@ -11,7 +11,7 @@ export const Alert = (message, type, msgTime = 2000) => {
   const alertMsg = document.createElement("div");
 
   alertBox.className =
-    "min-h-screen bg-black/80 absolute inset-0 flex flex-row justify-center items-center";
+    "fixed bg-black/80 absolute inset-0 flex flex-row justify-center items-center";
   alertMsg.className = `border h-30  text-black flex flex-row items-center justify-center ${alertStyles} rounded-xl p-5 alert-animation`;
 
   alertMsg.innerText = message;
