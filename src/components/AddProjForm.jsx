@@ -46,7 +46,7 @@ export const AddProjForm = ({ setIsAddProjFormShown, setIsProjectAdded }) => {
   }
 
   return (
-    <aside className="rounded-lg border shadow-xl bg-[var(--dialog-color-dark-navy)] text-white p-3 lg:p-5 2 lg:pb-13">
+    <aside className="open-add-proj-form rounded-lg border shadow-xl bg-[var(--dialog-color-dark-navy)] text-white p-3 lg:p-5 2 lg:pb-13 ">
       <div
         onClick={() => {
           setIsAddProjFormShown(false);

@@ -31,7 +31,12 @@ export const TableHeaderData = ({ sort }) => {
               onClick={() => {
                 toggleSort(item);
               }}
-              className="flex flex-row items-center gap-2 py-2"
+              className={`flex flex-row items-center gap-2 py-2 ${
+                // For removing CSS on icon with id: 6,7
+                item.id !== 6 &&
+                item.id !== 7 &&
+                "hover:text-[var(--text-color-gray)]"
+              } `}
             >
               <span className="cursor-pointer">{item.name}</span>
               {/* For removing these icons on id:6,7 */}

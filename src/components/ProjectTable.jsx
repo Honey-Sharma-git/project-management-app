@@ -12,7 +12,6 @@ export const ProjectTable = ({ isProjectAdded, setIsProjectAdded }) => {
       const response = await fetch("http://192.168.0.105:8080/feed/posts");
       const data = await response.json();
       if (response.status === 200) {
-        Alert(data.message, "success", msgTime.VERY_SHORT);
         setProjects(data.posts);
       } else {
         Alert(data.message, "warning", msgTime.VERY_LONG);
@@ -91,9 +90,9 @@ export const ProjectTable = ({ isProjectAdded, setIsProjectAdded }) => {
             )}
           </tbody>
         ) : (
-          <tfoot>
+          <tfoot className="text-center text-xl">
             <tr>
-              <td>Loading...</td>
+              <td colSpan={6}>Loading...</td>
             </tr>
           </tfoot>
         )}

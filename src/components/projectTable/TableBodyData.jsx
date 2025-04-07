@@ -3,7 +3,6 @@ import { FaPencilAlt } from "react-icons/fa";
 import { Alert } from "../../utils/common";
 import { msgTime } from "../../utils/constants";
 export const TableBodyData = ({ data, setIsProjectAdded }) => {
-  
   async function deleteProjData(data) {
     try {
       const response = await fetch(
@@ -14,7 +13,7 @@ export const TableBodyData = ({ data, setIsProjectAdded }) => {
       );
       const resData = await response.json();
       if (response.status === 200) {
-        Alert(resData.message, "success", msgTime.SHORT);
+        Alert(resData.message, "success", msgTime.VERY_SHORT);
         setIsProjectAdded((prev) => {
           return !prev;
         });
