@@ -12,6 +12,7 @@ export const Login = () => {
     return state.saveSignupData;
   });
   const [isPassShown, setIsPassShown] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState("");
   const [userId, setUserId] = useState("");
   const [userNameEmail, setUserNameEmail] = useState({});
@@ -35,6 +36,8 @@ export const Login = () => {
 
   async function login(e) {
     e.preventDefault();
+    //Show loading:
+    setIsLoading(true);
     try {
       const response = await fetch("http://192.168.0.105:8080/auth/login", {
         method: "POST",
@@ -54,9 +57,13 @@ export const Login = () => {
         setToken(data.token);
         setUserId(data.userId);
         setUserNameEmail({ name: data.name, email: data.email });
+        //Remove loading:
+        setIsLoading(false);
       } else {
         //Error message in Alert:
         Alert(data?.message, "warning", msgTime.LONG);
+        //Remove loading:
+        setIsLoading(false);
       }
     } catch (error) {
       console.log("Error putting data while signing up", error);
@@ -141,7 +148,9 @@ export const Login = () => {
             <div>
               <button
                 onClick={login}
-                className=" hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50"
+                className={`hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50 ${
+                  isLoading ? "animate-pulse" : null
+                }`}
               >
                 Log in
               </button>

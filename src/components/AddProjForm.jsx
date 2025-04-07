@@ -10,6 +10,7 @@ export const AddProjForm = ({ setIsAddProjFormShown, setIsProjectAdded }) => {
     testVersion: "",
     uatVersion: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(e) {
     setProjectData((prev) => {
@@ -18,6 +19,8 @@ export const AddProjForm = ({ setIsAddProjFormShown, setIsProjectAdded }) => {
   }
   async function postData(e) {
     e.preventDefault();
+    //Show loading:
+    setIsLoading(true);
     try {
       const response = await fetch("http://192.168.0.105:8080/feed/post", {
         method: "POST",
@@ -31,6 +34,8 @@ export const AddProjForm = ({ setIsAddProjFormShown, setIsProjectAdded }) => {
       });
       const data = await response.json();
       if (response.status === 201) {
+        //Remove loading:
+        setIsLoading(false);
         Alert(data.message, "success", msgTime.SHORT);
         setIsAddProjFormShown(false);
         setIsProjectAdded((prev) => {
@@ -38,6 +43,8 @@ export const AddProjForm = ({ setIsAddProjFormShown, setIsProjectAdded }) => {
         });
       } else {
         Alert(data.message, "warning", msgTime.LONG);
+        //Remove loading:
+        setIsLoading(false);
       }
     } catch (error) {
       console.log("Error while fetching post API", error);
@@ -107,7 +114,9 @@ export const AddProjForm = ({ setIsAddProjFormShown, setIsProjectAdded }) => {
             </div>
           </div>
           <button
-            className="text-white bg-[var(--btn-color-purple)] hover:bg-[var(--btn-hover-color-purple)] w-full lg:w-fit px-10 py-1  rounded-lg cursor-pointer"
+            className={`text-white bg-[var(--btn-color-purple)] hover:bg-[var(--btn-hover-color-purple)] w-full lg:w-fit px-10 py-1  rounded-lg cursor-pointer ${
+              isLoading ? "animate-pulse" : null
+            }`}
             onClick={postData}
           >
             Add

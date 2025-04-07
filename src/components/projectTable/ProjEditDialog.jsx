@@ -6,6 +6,7 @@ import { Alert } from "../../utils/common";
 import { msgTime } from "../../utils/constants";
 export const ProjEditDialog = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState();
   const projectData = useSelector((state) => {
     return state.projectData;
   });
@@ -23,6 +24,8 @@ export const ProjEditDialog = () => {
   }
   async function postUpdatedProjData(e) {
     e.preventDefault();
+    //Show loading:
+    setIsLoading(true);
     try {
       const response = await fetch(
         `http://192.168.0.105:8080/feed/post/${projectData._id}`,
@@ -40,10 +43,14 @@ export const ProjEditDialog = () => {
       const data = await response.json();
       if (response.status === 200) {
         Alert(data.message, "success");
+        //Remove loading:
+        setIsLoading(false);
         //For closing dialog box upon update
         dispatch(toggleProjForm());
       } else {
         Alert(data.message, "error", msgTime.VERY_LONG);
+        //Remove loading:
+        setIsLoading(false);
       }
     } catch (error) {
       console.log("Error while updating proj form data", error);
@@ -120,7 +127,9 @@ export const ProjEditDialog = () => {
           </div>
           <button
             onClick={postUpdatedProjData}
-            className="text-white bg-[var(--btn-color-purple)] hover:bg-[var(--btn-hover-color-purple)] w-full lg:w-fit px-10 py-1  rounded-lg cursor-pointer"
+            className={`text-white bg-[var(--btn-color-purple)] hover:bg-[var(--btn-hover-color-purple)] w-full lg:w-fit px-10 py-1  rounded-lg cursor-pointer ${
+              isLoading ? "animate-pulse" : null
+            }`}
           >
             Update
           </button>
