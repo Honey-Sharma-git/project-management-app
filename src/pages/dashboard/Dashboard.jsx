@@ -3,10 +3,17 @@ import { Navbar } from "../../components/Navbar";
 import { AddProjForm } from "../../components/AddProjForm";
 import { useState } from "react";
 import { ProjEditDialog } from "../../components/projectTable/ProjEditDialog";
+import { toggleProjForm } from "../../redux/slice/updateProjFormSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 export const Dashboard = () => {
   const [isAddProjFormShown, setIsAddProjFormShown] = useState(false);
   const [isProjectAdded, setIsProjectAdded] = useState(false);
-  const [isProjEditDialogOpen, setIsProjEditDialogOpen] = useState(false);
+  const dispatch = useDispatch();
+  const isUpdateDialogOpen = useSelector((state) => {
+    return state.updateProjForm;
+  });
+
   return (
     <>
       <header className="sticky top-0 z-40">
@@ -31,9 +38,7 @@ export const Dashboard = () => {
           isProjectAdded={isProjectAdded}
           setIsProjectAdded={setIsProjectAdded}
         />
-        {isProjEditDialogOpen && (
-          <ProjEditDialog setIsProjEditDialogOpen={setIsProjEditDialogOpen} />
-        )}
+        {isUpdateDialogOpen && <ProjEditDialog />}
       </main>
     </>
   );

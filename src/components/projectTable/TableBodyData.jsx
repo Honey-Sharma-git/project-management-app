@@ -2,7 +2,11 @@ import { FaTrashCan } from "react-icons/fa6";
 import { FaPencilAlt } from "react-icons/fa";
 import { Alert } from "../../utils/common";
 import { msgTime } from "../../utils/constants";
+import { getProjects } from "../../redux/slice/projectDataSlice";
+import { toggleProjForm } from "../../redux/slice/updateProjFormSlice";
+import { useDispatch } from "react-redux";
 export const TableBodyData = ({ data, setIsProjectAdded }) => {
+  const dispatch = useDispatch();
   async function deleteProjData(data) {
     try {
       const response = await fetch(
@@ -32,8 +36,16 @@ export const TableBodyData = ({ data, setIsProjectAdded }) => {
       <td className="p-2 py-2">{data.testVersion}</td>
       <td className="p-2 py-2">{data.uatVersion}</td>
       <td className="p-2 py-2">{data.liveVersion}</td>
-      <td className="p-2 py-2 text-lg text-[var(--btn-color-purple)] hover:text-[var(--color-teal)] cursor-pointer">
-        <FaPencilAlt />
+      <td className="p-2 py-2 text-lg text-[var(--btn-color-purple)] hover:text-[var(--color-teal)] ">
+        <button
+          onClick={() => {
+            dispatch(toggleProjForm());
+            dispatch(getProjects(data));
+          }}
+          className="cursor-pointer"
+        >
+          <FaPencilAlt />
+        </button>
       </td>
       <td className="p-2 py-2 text-xl text-[var(--btn-color-purple)] hover:text-[var(--color-teal)] ">
         <button
