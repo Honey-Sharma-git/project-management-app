@@ -1,12 +1,25 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleProjForm } from "../../redux/slice/updateProjFormSlice";
+import { useState } from "react";
 export const ProjEditDialog = () => {
   const dispatch = useDispatch();
   const projectData = useSelector((state) => {
     return state.projectData;
   });
+  const [updatedProjectData, setUpdatedProjectData] = useState({
+    projName: projectData.projName,
+    liveVersion: projectData.liveVersion,
+    testVersion: projectData.testVersion,
+    uatVersion: projectData.uatVersion,
+  });
+  console.log(updatedProjectData);
 
+  function handleFormUpdate(e) {
+    setUpdatedProjectData((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  }
   return (
     <aside className="min-h-screen absolute inset-0 flex flex-col justify-center open-add-proj-form rounded-lg border shadow-xl bg-[var(--dialog-color-dark-navy)] text-white p-3 lg:p-5 2 lg:pb-13 ">
       <div
@@ -24,6 +37,9 @@ export const ProjEditDialog = () => {
             <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
               <label htmlFor="projName">Project name:</label>
               <input
+                onChange={(e) => {
+                  handleFormUpdate(e);
+                }}
                 defaultValue={projectData.projName}
                 className="p-2 rounded-md  w-full md:w-1/2 lg:w-2/3  bg-[var(--input-bg-color)]"
                 type="text"
@@ -34,6 +50,9 @@ export const ProjEditDialog = () => {
             <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
               <label htmlFor="liveVersion">Live version:</label>
               <input
+                onChange={(e) => {
+                  handleFormUpdate(e);
+                }}
                 defaultValue={projectData.liveVersion}
                 className="p-2 rounded-md  w-full md:w-1/2 lg:w-2/3 bg-[var(--input-bg-color)]"
                 type="text"
@@ -46,6 +65,9 @@ export const ProjEditDialog = () => {
             <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
               <label htmlFor="testVersion">Test version:</label>
               <input
+                onChange={(e) => {
+                  handleFormUpdate(e);
+                }}
                 className="p-2 rounded-md  w-full md:w-1/2 lg:w-2/3  bg-[var(--input-bg-color)]"
                 defaultValue={projectData.testVersion}
                 type="text"
@@ -56,6 +78,9 @@ export const ProjEditDialog = () => {
             <div className="flex flex-row  flex-wrap gap-2  justify-between items-center">
               <label htmlFor="uatVersion">UAT version:</label>
               <input
+                onChange={(e) => {
+                  handleFormUpdate(e);
+                }}
                 className="p-2 rounded-md  w-full md:w-1/2 lg:w-2/3  bg-[var(--input-bg-color)]"
                 defaultValue={projectData.uatVersion}
                 type="text"
