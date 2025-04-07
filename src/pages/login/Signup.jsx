@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import { Alert } from "../../utils/common";
 import { useNavigate } from "react-router-dom";
 import { msgTime } from "../../utils/constants";
+import { takeSignupData } from "../../redux/slice/signupDataSlice";
+import { useDispatch } from "react-redux";
 
 export const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isPassShown, setIsPassShown] = useState(false);
   const [newUser, setNewUser] = useState({
     email: "",
@@ -28,7 +31,7 @@ export const Signup = () => {
     });
   }
 
-  async function postData() {
+  async function signUpUser() {
     try {
       const response = await fetch("http://192.168.0.105:8080/auth/signup", {
         method: "PUT",
@@ -41,6 +44,7 @@ export const Signup = () => {
 
       if (response.status === 201) {
         Alert(data.message, "success", msgTime.VERY_SHORT);
+        dispatch(takeSignupData(newUser));
         navigate("/");
       } else {
         Alert(data.data[0].msg, "error", msgTime.LONG);
@@ -148,7 +152,7 @@ export const Signup = () => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  postData();
+                  signUpUser();
                 }}
                 className=" hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50"
               >

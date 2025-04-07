@@ -5,15 +5,20 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "../../utils/common";
 import { msgTime } from "../../utils/constants";
+import { useSelector } from "react-redux";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const justSignedUpUser = useSelector((state) => {
+    return state.saveSignupData;
+  });
+  console.log(justSignedUpUser);
   const [isPassShown, setIsPassShown] = useState(false);
   const [token, setToken] = useState("");
   const [userId, setUserId] = useState("");
   const [user, setUser] = useState({
-    email: "honey@gmail.com",
-    password: "password",
+    email: justSignedUpUser.email,
+    password: justSignedUpUser.password,
   });
 
   function togglePassShown(e) {
