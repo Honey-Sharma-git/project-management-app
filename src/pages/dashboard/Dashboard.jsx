@@ -13,21 +13,23 @@ export const Dashboard = () => {
   const isUpdateDialogOpen = useSelector((state) => {
     return state.updateProjForm;
   });
-
+  const userRole = localStorage.getItem("userRole");
   return (
     <>
       <header className="sticky top-0 z-40">
         <Navbar />
       </header>
       <main className="px-2 sm:px-5 md:px-5 py-10 space-y-7 relative min-h-screen">
-        <button
-          onClick={() => {
-            setIsAddProjFormShown(true);
-          }}
-          className="bg-[var(--color-pink)] text-white cursor-pointer px-3 py-1 rounded-lg"
-        >
-          Add project
-        </button>
+        {userRole === "admin" && (
+          <button
+            onClick={() => {
+              setIsAddProjFormShown(true);
+            }}
+            className="bg-[var(--color-pink)] text-white cursor-pointer px-3 py-1 rounded-lg"
+          >
+            Add project
+          </button>
+        )}
         {isAddProjFormShown && (
           <AddProjForm
             setIsAddProjFormShown={setIsAddProjFormShown}

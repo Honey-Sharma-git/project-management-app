@@ -5,6 +5,7 @@ import { MdWorkspacePremium } from "react-icons/md";
 export const MyAccountModal = ({ isAccModalShown }) => {
   const userName = localStorage.getItem("userName");
   const userEmail = localStorage.getItem("userEmail");
+  const userRole = localStorage.getItem("userRole");
   return (
     <div
       className={`z-50 absolute top-8.5 shadow-xl p-3  rounded-lg bg-[var(--dialog-color-dark-navy)]  text-[var(--text-color-gray)] min-h-50 flex flex-col gap-3 transition-[ opacity 0.3s ease-in-out, transform 0.3s ease-in-out;] ${
@@ -18,12 +19,14 @@ export const MyAccountModal = ({ isAccModalShown }) => {
             src={profilePic}
             alt="User's profile picture."
           />
-          <span
-            title="Super Admin"
-            className="text-yellow-300 absolute  bottom-0 right-0 font-bold text-xl bg-[var(--color-dark-navy)] hover:bg-black rounded-full "
-          >
-            <MdWorkspacePremium />
-          </span>
+          {userRole === "admin" && (
+            <span
+              title="Super Admin"
+              className="text-yellow-300 absolute  bottom-0 right-0 font-bold text-xl bg-[var(--color-dark-navy)] hover:bg-black rounded-full "
+            >
+              <MdWorkspacePremium />
+            </span>
+          )}
         </div>
         <div>
           <figcaption>Hi {userName}</figcaption>
@@ -36,7 +39,7 @@ export const MyAccountModal = ({ isAccModalShown }) => {
               <th className="text-xl py-2 text-[var(--color-pink)]">
                 <FaUserAstronaut />
               </th>
-              <td className="text-sm">superAdmin123</td>
+              <td className="text-sm">{userRole}</td>
             </tr>
             <tr className="">
               <th className="text-xl py-2 text-[var(--color-pink)]">

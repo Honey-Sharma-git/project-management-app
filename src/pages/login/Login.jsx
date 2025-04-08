@@ -16,6 +16,7 @@ export const Login = () => {
   const [token, setToken] = useState("");
   const [userId, setUserId] = useState("");
   const [userNameEmail, setUserNameEmail] = useState({});
+  const [userRole, setUserRole] = useState("");
   const [user, setUser] = useState({
     email: justSignedUpUser.email,
     password: justSignedUpUser.password,
@@ -92,6 +93,7 @@ export const Login = () => {
         setToken(data.token);
         setUserId(data.userId);
         setUserNameEmail({ name: data.name, email: data.email });
+        setUserRole(data.role);
         //Remove loading:
         setIsLoading(false);
       } else {
@@ -112,6 +114,7 @@ export const Login = () => {
       localStorage.setItem("userId", userId);
       localStorage.setItem("userName", userNameEmail.name);
       localStorage.setItem("userEmail", userNameEmail.email);
+      localStorage.setItem("userRole", userRole);
     }
 
     if (localStorage.getItem("token")) {
@@ -206,7 +209,7 @@ export const Login = () => {
                   !(
                     (!touched.email && !touched.password) ||
                     (validation.isEmailValid && validation.isPasswordValid)
-                  )
+                  ) && !(justSignedUpUser.email && justSignedUpUser.password)
                 }
                 onClick={login}
                 className={`disabled:bg-[var(--btn-color-purple)]/30  disabled:cursor-not-allowed hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50 ${

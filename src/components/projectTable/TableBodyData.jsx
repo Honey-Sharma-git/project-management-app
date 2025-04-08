@@ -29,6 +29,7 @@ export const TableBodyData = ({ data, setIsProjectAdded }) => {
       Alert(error, "error", msgTime.VERY_LONG);
     }
   }
+  const userRole = localStorage.getItem("userRole");
 
   return (
     <tr className="border-b hover:bg-gray-100 ">
@@ -36,28 +37,32 @@ export const TableBodyData = ({ data, setIsProjectAdded }) => {
       <td className="p-2 py-2">{data.testVersion}</td>
       <td className="p-2 py-2">{data.uatVersion}</td>
       <td className="p-2 py-2">{data.liveVersion}</td>
-      <td className="p-2 py-2 text-lg text-[var(--btn-color-purple)] hover:text-[var(--color-teal)] ">
-        <button
-          onClick={() => {
-            dispatch(toggleProjForm());
-            dispatch(getProjects(data));
-          }}
-          className="cursor-pointer"
-        >
-          <FaPencilAlt />
-        </button>
-      </td>
-      <td className="p-2 py-2 text-xl text-[var(--btn-color-purple)] hover:text-[var(--color-teal)] ">
-        <button
-          className="cursor-pointer"
-          onClick={() => {
-            const answer = window.confirm("Do you want to delete?");
-            answer ? deleteProjData(data) : null;
-          }}
-        >
-          <FaTrashCan />
-        </button>
-      </td>
+      {userRole === "admin" && (
+        <td className="p-2 py-2 text-lg text-[var(--btn-color-purple)] hover:text-[var(--color-teal)] ">
+          <button
+            onClick={() => {
+              dispatch(toggleProjForm());
+              dispatch(getProjects(data));
+            }}
+            className="cursor-pointer"
+          >
+            <FaPencilAlt />
+          </button>
+        </td>
+      )}
+      {userRole === "admin" && (
+        <td className="p-2 py-2 text-xl text-[var(--btn-color-purple)] hover:text-[var(--color-teal)] ">
+          <button
+            className="cursor-pointer"
+            onClick={() => {
+              const answer = window.confirm("Do you want to delete?");
+              answer ? deleteProjData(data) : null;
+            }}
+          >
+            <FaTrashCan />
+          </button>
+        </td>
+      )}
     </tr>
   );
 };

@@ -22,6 +22,7 @@ export const TableHeaderData = ({ sort }) => {
       });
     });
   }
+  const userRole = localStorage.getItem("userRole");
   return (
     <tr>
       {header.map((item) => {
@@ -38,7 +39,9 @@ export const TableHeaderData = ({ sort }) => {
                 "hover:text-[var(--text-color-gray)]"
               } `}
             >
-              <span className="cursor-pointer">{item.name}</span>
+              {item.id !== 6 && item.id !== 7 && userRole && (
+                <span className="cursor-pointer">{item.name}</span>
+              )}
               {/* For removing these icons on id:6,7 */}
               {item.id !== 6 && item.id !== 7 && (
                 <span>
