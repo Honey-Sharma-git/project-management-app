@@ -17,15 +17,42 @@ export const Signup = () => {
     password: "",
     name: "",
   });
-
+  const [validation, setValidation] = useState({
+    isNameValid: false,
+    isEmailValid: false,
+    isPassValid: false,
+  });
   function togglePassShown(e) {
     e.preventDefault();
     setIsPassShown((prev) => {
       return !prev;
     });
   }
-
+  function signupFormValidation(e) {
+    const fieldName = e.target.name;
+    const fieldVal = e.target.value;
+    if ("name" === fieldName) {
+      const isValid = fieldVal.length >= 3;
+      setValidation((prev) => {
+        return { ...prev, isNameValid: isValid };
+      });
+    } else if ("email" === fieldName) {
+      const isValid =
+        fieldVal.includes("@") &&
+        fieldVal.includes(".") &&
+        !fieldVal.includes(" ");
+      setValidation((prev) => {
+        return { ...prev, isEmailValid: isValid };
+      });
+    } else if ("password" === fieldName) {
+      const isValid = fieldVal.length >= 6 && !fieldVal.includes(" ");
+      setValidation((prev) => {
+        return { ...prev, isPassValid: isValid };
+      });
+    }
+  }
   function handleChange(e) {
+    signupFormValidation(e);
     setNewUser((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
@@ -86,37 +113,59 @@ export const Signup = () => {
           </p>
           <form className="flex flex-col gap-3 ">
             <div className="flex flex-row gap-5 flex-wrap lg:flex-nowrap justify-between ">
-              <div className="flex flex-col w-full    gap-1">
+              <div className="flex flex-col w-full gap-1">
                 <label htmlFor="name">Full name:</label>
                 <input
                   onChange={handleChange}
-                  className="p-2 bg-[var(--input-bg-color)] rounded-sm"
+                  className={`p-2 bg-[var(--input-bg-color)] rounded-sm ${
+                    validation.isNameValid
+                      ? "focus:outline-green-300 focus:outline-2"
+                      : "focus:outline-red-400 focus:outline-2"
+                  }`}
                   type="text"
                   name="name"
                   id="name"
                   value={newUser.name}
                   placeholder="Karan Kapoor"
                 />
+                {newUser.name && !validation.isNameValid && (
+                  <p role="alert" className="text-red-500 text-sm">
+                    Name should be at least 3 character long.
+                  </p>
+                )}
               </div>
             </div>
             <div className="flex flex-col gap-1">
               <label htmlFor="email">Email:</label>
               <input
                 onChange={handleChange}
-                className="p-2 bg-[var(--input-bg-color)] rounded-sm"
+                className={`p-2 bg-[var(--input-bg-color)] rounded-sm ${
+                  validation.isEmailValid
+                    ? "focus:outline-green-300 focus:outline-2"
+                    : "focus:outline-red-400 focus:outline-2"
+                }`}
                 type="text"
                 name="email"
                 id="email"
                 value={newUser.email}
                 placeholder="myemail@example.com"
               />
+              {newUser.email && !validation.isEmailValid && (
+                <p role="alert" className="text-red-500 text-sm">
+                  Enter valid email (include @ .(dot) and without space)
+                </p>
+              )}
             </div>
             <div className="flex flex-col gap-1">
               <label htmlFor="password">Password:</label>
               <div className="relative">
                 <input
                   onChange={handleChange}
-                  className="p-2 pr-10 bg-[var(--input-bg-color)] rounded-sm w-full"
+                  className={`p-2 pr-10 bg-[var(--input-bg-color)] rounded-sm w-full ${
+                    validation.isPassValid
+                      ? "focus:outline-green-300 focus:outline-2"
+                      : "focus:outline-red-400 focus:outline-2"
+                  }`}
                   type={isPassShown ? "text" : "password"}
                   name="password"
                   id="password"
@@ -133,6 +182,11 @@ export const Signup = () => {
                   {isPassShown ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
+              {newUser.password && !validation.isPassValid && (
+                <p role="alert" className="text-red-500 text-sm">
+                  Password must be at least 6 characters long.
+                </p>
+              )}
             </div>
             <div className="flex flex-row gap-3 px-1">
               <span>
@@ -150,11 +204,18 @@ export const Signup = () => {
             </div>
             <div>
               <button
+                disabled={
+                  !(
+                    validation.isNameValid &&
+                    validation.isEmailValid &&
+                    validation.isPassValid
+                  )
+                }
                 onClick={(e) => {
                   e.preventDefault();
                   signUpUser();
                 }}
-                className=" hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50"
+                className="disabled:bg-[var(--btn-color-purple)]/30  disabled:cursor-not-allowed hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50"
               >
                 Create account
               </button>
