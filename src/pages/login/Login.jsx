@@ -20,10 +20,14 @@ export const Login = () => {
     email: justSignedUpUser.email,
     password: justSignedUpUser.password,
   });
-
   const [validation, setValidation] = useState({
     isEmailValid: false,
     isPasswordValid: false,
+  });
+  //Introduced this to prevent appearance of validation msg when redirected from just signed up user.
+  const [touched, setTouched] = useState({
+    email: false,
+    password: false,
   });
 
   function togglePassShown(e) {
@@ -56,6 +60,9 @@ export const Login = () => {
   }
 
   function handleChange(e) {
+    setTouched((prev) => {
+      return { ...prev, [e.target.name]: true };
+    });
     formValidation(e);
     setUser((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -149,7 +156,7 @@ export const Login = () => {
                 value={user.email}
                 placeholder="myemail@example.com"
               />
-              {user.email && !validation.isEmailValid && (
+              {touched.email && user.email && !validation.isEmailValid && (
                 <p role="alert" className="text-red-500 text-sm">
                   Enter a valid email (Include '@', '.' without space)
                 </p>
@@ -181,11 +188,13 @@ export const Login = () => {
                   {isPassShown ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
-              {user.password && !validation.isPasswordValid && (
-                <p role="alert" className="text-red-500 text-sm">
-                  Enter a valid email (Include '@', '.' without space)
-                </p>
-              )}
+              {touched.password &&
+                user.password &&
+                !validation.isPasswordValid && (
+                  <p role="alert" className="text-red-500 text-sm">
+                    Enter a valid email (Include '@', '.' without space)
+                  </p>
+                )}
             </div>
             <div className="flex flex-row gap-3 px-1">
               <span>
