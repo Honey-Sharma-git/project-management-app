@@ -17,7 +17,9 @@ export const Signup = () => {
     email: "",
     password: "",
     name: "",
+    role: "",
   });
+  console.log(newUser);
   const [validation, setValidation] = useState({
     isNameValid: false,
     isEmailValid: false,
@@ -201,6 +203,30 @@ export const Signup = () => {
                   Password must be at least 6 characters long.
                 </p>
               )}
+            </div>
+            <div className="flex flex-row justify-start items-center gap-2">
+              <p>Select role:</p>
+              <div className="space-x-2">
+                <input
+                  onChange={handleChange}
+                  type="radio"
+                  name="role"
+                  id="user"
+                  defaultChecked={true}
+                  value={"user"}
+                />
+                <label htmlFor="user">User</label>
+              </div>
+              <div className="space-x-2">
+                <input
+                  onChange={handleChange}
+                  type="radio"
+                  name="role"
+                  id="admin"
+                  value={"admin"}
+                />
+                <label htmlFor="admin">Admin</label>
+              </div>
             </div>
             <div className="flex flex-row gap-3 px-1">
               <span>
