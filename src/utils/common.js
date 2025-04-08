@@ -24,3 +24,6 @@ export const Alert = (message, type, msgTime = 2000) => {
     alertBox.remove();
   }, msgTime);
 };
+export function capitalizeWords(fullname) {
+  return fullname.replace(/\b\w/g, (char) => char.toUpperCase());
+}

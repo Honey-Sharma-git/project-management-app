@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { msgTime } from "../../utils/constants";
 import { takeSignupData } from "../../redux/slice/signupDataSlice";
 import { useDispatch } from "react-redux";
-
+import { capitalizeWords } from "../../utils/common";
 export const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [isPassShown, setIsPassShown] = useState(false);
   const [newUser, setNewUser] = useState({
     email: "",
@@ -51,15 +52,23 @@ export const Signup = () => {
       });
     }
   }
+
   function handleChange(e) {
     signupFormValidation(e);
     setNewUser((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      const { name, value } = e.target;
+      if (name === "name") {
+        return { ...prev, [name]: capitalizeWords(value) };
+      } else {
+        return { ...prev, [name]: value };
+      }
     });
   }
 
   async function signUpUser() {
     try {
+      //Show loading:
+      setLoading(true);
       const response = await fetch("http://192.168.0.105:8080/auth/signup", {
         method: "PUT",
         headers: {
@@ -70,10 +79,14 @@ export const Signup = () => {
       const data = await response.json();
 
       if (response.status === 201) {
+        //Hide loading:
+        setLoading(false);
         Alert(data.message, "success", msgTime.VERY_SHORT);
         dispatch(takeSignupData(newUser));
         navigate("/");
       } else {
+        //Show loading:
+        setLoading(true);
         Alert(data.data[0].msg, "error", msgTime.LONG);
       }
     } catch (error) {
@@ -86,6 +99,7 @@ export const Signup = () => {
       name: "",
     });
   }
+
   return (
     <main className="flex flex-row justify-center items-center min-h-screen p-5 sm:pl-5 md:pl-20 bg-[var(--color-dark-navy)]">
       <article className="w-full rounded-xl flex flex-row sm:gap-5 md:gap-20 drop-shadow-2xl min-h-[90vh] text-[var(--text-color-gray)]">
@@ -215,7 +229,9 @@ export const Signup = () => {
                   e.preventDefault();
                   signUpUser();
                 }}
-                className="disabled:bg-[var(--btn-color-purple)]/30  disabled:cursor-not-allowed hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50"
+                className={`disabled:bg-[var(--btn-color-purple)]/30  disabled:cursor-not-allowed hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50 ${
+                  loading ? "animate-pulse" : null
+                }`}
               >
                 Create account
               </button>

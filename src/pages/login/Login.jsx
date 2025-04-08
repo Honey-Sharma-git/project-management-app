@@ -74,33 +74,31 @@ export const Login = () => {
     //Show loading:
     setIsLoading(true);
     try {
-      if (validation.isEmailValid && validation.isPasswordValid) {
-        const response = await fetch("http://192.168.0.105:8080/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        });
-        const data = await response.json();
+      const response = await fetch("http://192.168.0.105:8080/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
 
-        //On success of API:
-        if (response.status === 200) {
-          //Login successful Alert:
-          Alert(data?.message, "success", msgTime.VERY_SHORT);
+      //On success of API:
+      if (response.status === 200) {
+        //Login successful Alert:
+        Alert(data?.message, "success", msgTime.VERY_SHORT);
 
-          //Setting token and userId to localStorage:
-          setToken(data.token);
-          setUserId(data.userId);
-          setUserNameEmail({ name: data.name, email: data.email });
-          //Remove loading:
-          setIsLoading(false);
-        } else {
-          //Error message in Alert:
-          Alert(data?.message, "warning", msgTime.LONG);
-          //Remove loading:
-          setIsLoading(false);
-        }
+        //Setting token and userId to localStorage:
+        setToken(data.token);
+        setUserId(data.userId);
+        setUserNameEmail({ name: data.name, email: data.email });
+        //Remove loading:
+        setIsLoading(false);
+      } else {
+        //Error message in Alert:
+        Alert(data?.message, "warning", msgTime.LONG);
+        //Remove loading:
+        setIsLoading(false);
       }
     } catch (error) {
       console.log("Error putting data while signing up", error);
@@ -205,7 +203,10 @@ export const Login = () => {
             <div>
               <button
                 disabled={
-                  !(validation.isEmailValid && validation.isPasswordValid)
+                  !(
+                    (!touched.email && !touched.password) ||
+                    (validation.isEmailValid && validation.isPasswordValid)
+                  )
                 }
                 onClick={login}
                 className={`disabled:bg-[var(--btn-color-purple)]/30  disabled:cursor-not-allowed hover:bg-[var(--btn-hover-color-purple)] cursor-pointer p-2 bg-[var(--btn-color-purple)] rounded-sm w-full shadow-xl shadow-gray-900/50 ${
