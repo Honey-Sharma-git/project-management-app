@@ -66,7 +66,12 @@ export const Login = () => {
     });
     formValidation(e);
     setUser((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      const { name, value } = e.target;
+      if ("email" === name) {
+        return { ...prev, [name]: value.toLowerCase() };
+      } else {
+        return { ...prev, [name]: value };
+      }
     });
   }
 

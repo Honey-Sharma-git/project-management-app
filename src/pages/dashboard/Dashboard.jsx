@@ -25,7 +25,7 @@ export const Dashboard = () => {
             onClick={() => {
               setIsAddProjFormShown(true);
             }}
-            className="bg-[var(--color-pink)] text-white cursor-pointer px-3 py-1 rounded-lg"
+            className="bg-[var(--color-pink)] text-white cursor-pointer px-3 py-1 rounded-lg hover:bg-[var(--color-hover-pink)]"
           >
             Add project
           </button>

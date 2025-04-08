@@ -17,7 +17,7 @@ export const Signup = () => {
     email: "",
     password: "",
     name: "",
-    role: "",
+    role: "user",
   });
   console.log(newUser);
   const [validation, setValidation] = useState({
@@ -61,6 +61,8 @@ export const Signup = () => {
       const { name, value } = e.target;
       if (name === "name") {
         return { ...prev, [name]: capitalizeWords(value) };
+      } else if ("email" === name) {
+        return { ...prev, [name]: value.toLowerCase() };
       } else {
         return { ...prev, [name]: value };
       }
